@@ -1,0 +1,128 @@
+enum POSITION {
+	guard
+	forward
+	center
+}
+
+type Token {
+	token: String!
+}
+
+type Player {
+	pos: POSITION!
+	name: String!
+	age: Int!
+	experience: Int!
+	stats: Stats!
+}
+
+input InputPlayer {
+	pos: POSITION!
+	name: String!
+	age: Int!
+	experience: Int!
+	stats: InputStats!
+}
+
+input InputUpdatePlayer {
+	pos: POSITION
+	name: String
+	age: Int
+	experience: Int
+	stats: InputUpdateStats
+}
+
+type Stats {
+	season: String!
+	points: Float!
+	threePt: Float!
+	rebounds: Float!
+	assists: Float!
+	steals: Float!
+	blocks: Float!
+	turnOvers: Float!
+	mp: Float!
+}
+
+input InputStats {
+	season: String!
+	points: Float!
+	threePt: Float!
+	rebounds: Float!
+	assists: Float!
+	steals: Float!
+	blocks: Float!
+	turnOvers: Float!
+	mp: Float!
+}
+
+input InputUpdateStats {
+	season: String
+	points: Float
+	threePt: Float
+	rebounds: Float
+	assists: Float
+	steals: Float
+	blocks: Float
+	turnOvers: Float
+	mp: Float
+}
+
+interface UserInfo {
+	id: ID!
+	username: String!
+	password: String!
+}
+
+type User implements UserInfo {
+	id: ID!
+	username: String!
+	password: String!
+}
+
+input InputUser {
+	username: String!
+	password: String!
+}
+
+input UpdateUsername {
+	id: ID
+	oldUsername: String!
+	newUsername: String!
+}
+
+input UpdatePassword {
+	id: ID
+	username: String!
+	newPassword: String!
+}
+
+type Query {
+	player(name: String!): Player!
+	getUserId(username: String!): String!
+	user(username: String!): User!
+}
+
+type Subscription {
+	player: Player!
+}
+
+type Mutation {
+	createPlayer(player: InputPlayer!): Player!
+
+	updatePlayer(player: InputUpdatePlayer!): Player!
+
+	deletePlayer(name: String!): Player!
+
+	login(user: InputUser!): String!
+
+	refreshToken(token: String!): String!
+
+	createUser(user: InputUser!): String!
+
+	updateUsername(usernames: UpdateUsername!): String!
+
+	updatePassword(passwords: UpdatePassword!): String!
+
+	deleteUser(username: String!): String!
+}
