@@ -1,3 +1,8 @@
 vendor
 .env
 Makefile
+Dockerfile
+.dockerignore
+.git
+.gitignore
+README.md
